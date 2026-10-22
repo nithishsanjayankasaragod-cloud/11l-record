@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11L Class Teacher Record — Nithish Sanjayan Kasaragod</title>
+<style>
+  :root {
+    --primary: #1a365d;
+    --primary-light: #2b6cb0;
+    --accent: #e53e3e;
+    --green: #276749;
+    --green-bg: #c6f6d5;
+    --yellow: #975a16;
+    --yellow-bg: #fefcbf;
+    --red: #9b2c2c;
+    --red-bg: #fed7d7;
+    --blue-bg: #bee3f8;
+    --gray: #718096;
+    --light: #f7fafc;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #edf2f7;
+    color: #2d3748;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-lg);
+  }
+  .header h1 { font-size: 1.8em; margin-bottom: 5px; }
+  .header p { opacity: 0.9; font-size: 0.95em; }
+  .header .confidential {
+    background: var(--accent);
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    margin-top: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  /* NAV */
+  .nav {
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    padding: 0;
+    position: sticky;
+    top: 95px;
+    z-index: 99;
+    overflow-x: auto;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+  }
+  .nav a {
+    display: inline-block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 0.85em;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav a:hover, .nav a.active {
+    border-bottom-color: var(--primary-light);
+    background: var(--light);
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  /* SECTIONS */
+  .section {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow);
+  }
+  .section h2 {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary-light);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+  }
+  .section h3 {
+    color: var(--primary-light);
+    margin: 18px 0 10px;
+    font-size: 1.05em;
+  }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 0.88em;
+  }
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 10px 8px;
+    text-align: left;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+  }
+  td {
+    padding: 9px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:hover { background: #f0f5ff; }
+  tr:nth-child(even) { background: #fafbfc; }
+  tr:nth-child(even):hover { background: #f0f5ff; }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+  .badge-green { background: var(--green-bg); color: var(--green); }
+  .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+  .badge-red { background: var(--red-bg); color: var(--red); }
+  .badge-blue { background: var(--blue-bg); color: var(--primary-light); }
+
+  /* CARDS */
+  .student-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 18px;
+    margin-top: 15px;
+  }
+  .student-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+  }
+  .student-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .student-card h4 {
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-size: 1em;
+  }
+  .student-card .index {
+    color: var(--gray);
+    font-size: 0.8em;
+  }
+  .student-card .detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 0.88em;
+    border-bottom: 1px dashed var(--border);
+  }
+  .student-card .detail:last-child { border-bottom: none; }
+  .student-card .label { color: var(--gray); font-weight: 600; }
+  .student-card .notes {
+    margin-top: 10px;
+    padding: 8px;
+    background: #f7fafc;
+    border-radius: 5px;
+    font-size: 0.85em;
+    border-left: 3px solid var(--primary-light);
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .stat-box {
+    background: var(--light);
+    border-radius: 8px;
+    padding: 18px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .stat-box .number {
+    font-size: 2em;
+    font-weight: 800;
+    color: var(--primary);
+  }
+  .stat-box .label {
+    font-size: 0.8em;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+  .stat-box.green .number { color: var(--green); }
+  .stat-box.red .number { color: var(--accent); }
+  .stat-box.yellow .number { color: var(--yellow); }
+
+  /* ACTION ITEMS */
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background: var(--white);
+  }
+  .action-item .priority {
+    min-width: 60px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.8em;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .priority-high { background: var(--red-bg); color: var(--red); }
+  .priority-medium { background: var(--yellow-bg); color: var(--yellow); }
+  .priority-low { background: var(--green-bg); color: var(--green); }
+
+  /* SEARCH */
+  .search-box {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1em;
+    margin-bottom: 15px;
+    outline: none;
+    transition: border 0.2s;
+  }
+  .search-box:focus { border-color: var(--primary-light); }
+
+  /* TABS */
+  .tab-buttons {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 8px 16px;
+    border: 2px solid var(--border);
+    background: var(--white);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85em;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover, .tab-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* PRINT */
+  @media print {
+    .header { position: static; }
+    .nav { display: none; }
+    .section { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: white; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .student-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .header h1 { font-size: 1.3em; }
+    table { font-size: 0.78em; }
+    th, td { padding: 6px 4px; }
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--gray);
+    font-size: 0.85em;
+  }
+
+  .print-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    margin: 10px 5px;
+  }
+  .print-btn:hover { background: var(--primary-light); }
+
+  .toggle-btn {
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>📋 Class 11L — Teacher Record</h1>
+  <p>Nithish Sanjayan Kasaragod | Batch 2025 | 14 Jun 2026 – 22 Oct 2026</p>
+  <div class="confidential">🔒 CONFIDENTIAL — INTERNAL USE ONLY</div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <a href="#dashboard">Dashboard</a>
+  <a href="#attendance">Attendance</a>
+  <a href="#btec">BTEC Progress</a>
+  <a href="#students">Student Profiles</a>
+  <a href="#uniform">Uniform</a>
+  <a href="#dropped">Dropped</a>
+  <a href="#actions">Action Plan</a>
+</div>
+
+<div class="container">
+
+  <!-- DASHBOARD -->
+  <div class="section" id="dashboard">
+    <h2>📊 Dashboard Overview</h2>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="number">83</div>
+        <div class="label">Teaching Days</div>
+      </div>
+      <div class="stat-box green">
+        <div class="number">12</div>
+        <div class="label">Active Students</div>
+      </div>
+      <div class="stat-box red">
+        <div class="number">11</div>
+        <div class="label">Dropped Students</div>
+      </div>
+      <div class="stat-box green">
+        <div class="number">5</div>
+        <div class="label">Above 75% Att.</div>
+      </div>
+      <div class="stat-box yellow">
+        <div class="number">5</div>
+        <div class="label">Below 75% Att.</div>
+      </div>
+      <div class="stat-box red">
+        <div class="number">2</div>
+        <div class="label">Critical Cases</div>
+      </div>
+    </div>
+
+    <h3>Class Information</h3>
+    <table>
+      <tr><td><strong>Class Teacher</strong></td><td>Nithish Sanjayan Kasaragod</td></tr>
+      <tr><td><strong>Class</strong></td><td>11L</td></tr>
+      <tr><td><strong>Batch</strong></td><td>Batch 2025</td></tr>
+      <tr><td><strong>Period</strong></td><td>14 Jun 2026 – 22 Oct 2026</td></tr>
+      <tr><td><strong>Timing (till Sep 10)</strong></td><td>10:30 AM – 1:15 PM</td></tr>
+      <tr><td><strong>Timing (after Sep 10)</strong></td><td>10:30 AM – 12:15 PM</td></tr>
+      <tr><td><strong>Min. Attendance</strong></td><td>75%</td></tr>
+      <tr><td><strong>Assessment</strong></td><td>BTEC Assignments, Reports, Roleplay</td></tr>
+    </table>
+
+    <h3>Unit Teachers</h3>
+    <table>
+      <tr><th>Unit</th><th>Teacher</th><th>Assessment</th></tr>
+      <tr><td>Unit 3</td><td>Thulasi</td><td>Assignments / Reports / Roleplay</td></tr>
+      <tr><td>Unit 4</td><td><strong>Nithish Sanjayan Kasaragod</strong></td><td>Assignments / Reports / Roleplay</td></tr>
+      <tr><td>Unit 8</td><td>Thulasi</td><td>Assignments / Reports / Roleplay</td></tr>
+      <tr><td>Unit 21</td><td>Hussain Shareef</td><td>Assignments / Reports / Roleplay</td></tr>
+      <tr><td>Unit 22</td><td><strong>Nithish Sanjayan Kasaragod</strong></td><td>Assignments / Reports / Roleplay</td></tr>
+    </table>
+
+    <h3>Holidays & Exams</h3>
+    <table>
+      <tr><th>Dates</th><th>Event</th></tr>
+      <tr><td>24 May – 30 May</td><td>Holiday Week (before reporting period)</td></tr>
+      <tr><td>19 Jul – 31 Aug</td><td>Long Holiday</td></tr>
+      <tr><td>23 Aug – 7 Sep</td><td>Exams (English, Dhivehi, Islam)</td></tr>
+      <tr><td>10 Sep – 21 Sep</td><td>Holiday</td></tr>
+    </table>
+  </div>
+
+  <!-- ATTENDANCE -->
+  <div class="section" id="attendance">
+    <h2>📅 Attendance Record</h2>
+    <p style="color:var(--gray);margin-bottom:15px;font-size:0.9em;">
+      ⚠️ Attendance percentages from school system. Complete unmarked days for final figures.
+    </p>
+    <div style="overflow-x:auto;">
+    <table>
+      <tr>
+        <th>#</th><th>Index</th><th>Student</th><th>Present</th><th>Absent</th>
+        <th>Unmark</th><th>Late</th><th>Early</th><th>Att %</th><th>Status</th>
+      </tr>
+      <tr>
+        <td>1</td><td>4898</td><td>Aasiyath Saashin Ali</td>
+        <td>71</td><td>2</td><td>9</td><td>0</td><td>0</td>
+        <td><strong>96%</strong></td><td><span class="badge badge-green">✅ Pass</span></td>
+      </tr>
+      <tr>
+        <td>2</td><td>4879</td><td>Hussain Jumaan Mohamed</td>
+        <td>68</td><td>5</td><td>9</td><td>0</td><td>0</td>
+        <td><strong>93%</strong></td><td><span class="badge badge-green">✅ Pass</span></td>
+      </tr>
+      <tr>
+        <td>3</td><td>4769</td><td>Aminath Nimshy Abdul Qadhir</td>
+        <td>60</td><td>13</td><td>9</td><td>0</td><td>0</td>
+        <td><strong>83%</strong></td><td><span class="badge badge-green">✅ Pass</span></td>
+      </tr>
+      <tr>
+        <td>4</td><td>4794</td><td>Fathimath Manha Shiyam</td>
+        <td>59</td><td>14</td><td>9</td><td>1</td><td>0</td>
+        <td><strong>82%</strong></td><td><span class="badge badge-green">✅ Pass</span></td>
+      </tr>
+      <tr>
+        <td>5</td><td>4752</td><td>Mohamed Dheedhath Ahmed</td>
+        <td>56</td><td>17</td><td>9</td><td>1</td><td>0</td>
+        <td><strong>78%</strong></td><td><span class="badge badge-green">✅ Pass</span></td>
+      </tr>
+      <tr>
+        <td>6</td><td>4796</td><td>Mohamed Ayaan Aswad</td>
+        <td>52</td><td>21</td><td>9</td><td>4</td><td>0</td>
+        <td><strong>73%</strong></td><td><span class="badge badge-yellow">⚠️ Below</span></td>
+      </tr>
+      <tr>
+        <td>7</td><td>4841</td><td>Zaisha Saud</td>
+        <td>51</td><td>22</td><td>9</td><td>11</td><td>0</td>
+        <td><strong>72%</strong></td><td><span class="badge badge-yellow">⚠️ Below</span></td>
+      </tr>
+      <tr>
+        <td>8</td><td>4829</td><td>Ahmed Izmaan Nazeer</td>
+        <td>40</td><td>33</td><td>9</td><td>0</td><td>0</td>
+        <td><strong>59%</strong></td><td><span class="badge badge-yellow">⚠️ Below</span></td>
+      </tr>
+      <tr>
+        <td>9</td><td>4859</td><td>Aishath Aileen Ikleel</td>
+        <td>39</td><td>34</td><td>9</td><td>0</td><td>0</td>
+        <td><strong>58%</strong></td><td><span class="badge badge-yellow">⚠️ Below</span></td>
+      </tr>
+      <tr>
+        <td>10</td><td>4922</td><td>Mariyam Maleesha Mujahid</td>
+        <td>37</td><td>36</td><td>9</td><td>0</td><td>1</td>
+        <td><strong>55%</strong></td><td><span class="badge badge-yellow">⚠️ Below</span></td>
+      </tr>
+      <tr>
+        <td>11</td><td>4843</td><td>Hassan Shaus Mohamed</td>
+        <td>21</td><td>52</td><td>9</td><td>1</td><td>0</td>
+        <td><strong>36%</strong></td><td><span class="badge badge-red">🔴 Critical</span></td>
+      </tr>
+      <tr>
+        <td>12</td><td>4933</td><td>Fathimath Umama B.A. Shafeeudheen</td>
+        <td>4</td><td>69</td><td>9</td><td>0</td><td>0</td>
+        <td><strong>16%</strong></td><td><span class="badge badge-red">🔴 Critical</span></td>
+      </tr>
+    </table>
+    </div>
+  </div>
+
+  <!-- BTEC PROGRESS -->
+  <div class="section" id="btec">
+    <h2>📚 BTEC Unit Progress</h2>
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="showTab('units422')">Units 4 & 22 (Nithish)</button>
+      <button class="tab-btn" onclick="showTab('units38')">Units 3 & 8 (Thulasi)</button>
+      <button class="tab-btn" onclick="showTab('unit21')">Unit 21 (Hussain)</button>
+    </div>
+
+    <div class="tab-content active" id="units422">
+      <h3>Units 4 & 22 — Nithish Sanjayan Kasaragod</h3>
+      <div style="overflow-x:auto;">
+      <table>
+        <tr><th>Student</th><th>Unit 4</th><th>Unit 22</th><th>Notes</th></tr>
+        <tr><td>Nimshy</td><td><span class="badge badge-yellow">✅ Corrections Pending</span></td><td><span class="badge badge-yellow">✅ Corrections Pending</span></td><td>Resubmit corrections</td></tr>
+        <tr><td>Manha</td><td><span class="badge badge-green">✅ Done</span></td><td><span class="badge badge-green">✅ Done</span></td><td>Submits first — on track</td></tr>
+        <tr><td>Saashin</td><td><span class="badge badge-green">✅ Done</span></td><td><span class="badge badge-yellow">🟡 Half Done</span></td><td>U22 incomplete — informed</td></tr>
+        <tr><td>Zaisha</td><td><span class="badge badge-green">✅ Done</span></td><td><span class="badge badge-green">✅ Done</span></td><td>Spelling support needed</td></tr>
+        <tr><td>Maleesha</td><td><span class="badge badge-green">✅ Done (Distinction)</span></td><td><span class="badge badge-green">✅ Done (Distinction)</span></td><td>🌟 All Distinction</td></tr>
+        <tr><td>Aileen</td><td><span class="badge badge-green">✅ Done</span></td><td><span class="badge badge-green">✅ Done</span></td><td>All complete</td></tr>
+        <tr><td>Shaus</td><td><span class="badge badge-red">❌ Not Done</span></td><td><span class="badge badge-red">❌ Not Done</span></td><td>Zero submissions</td></tr>
+        <tr><td>Izman</td><td><span class="badge badge-yellow">🟡 In Progress</span></td><td><span class="badge badge-yellow">🟡 In Progress</span></td><td>Not received yet — informed</td></tr>
+        <tr><td>Juman</td><td><span class="badge badge-yellow">🟡 Half Done</span></td><td><span class="badge badge-yellow">🟡 Half Done</span></td><td>Capable but inconsistent</td></tr>
+        <tr><td>Deedath</td><td><span class="badge badge-yellow">🟡 Half (Not Received)</span></td><td><span class="badge badge-yellow">🟡 Half (Not Received)</span></td><td>ADHD — structured deadlines</td></tr>
+        <tr><td>Ayaan</td><td><span class="badge badge-green">✅ All Received</span></td><td><span class="badge badge-green">✅ All Received</span></td><td>On track</td></tr>
+        <tr><td>Ummama</td><td><span class="badge badge-red">❌ Not Received</span></td><td><span class="badge badge-red">❌ Not Received</span></td><td>Wellbeing concerns</td></tr>
+      </table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="units38">
+      <h3>Units 3 & 8 — Thulasi</h3>
+      <p style="color:var(--gray);">⚠️ Data pending from Thulasi. Known info below.</p>
+      <table>
+        <tr><th>Student</th><th>Unit 3</th><th>Unit 8</th><th>Notes</th></tr>
+        <tr><td>Nimshy</td><td><span class="badge badge-red">❌ Not Submitted</span></td><td><span class="badge badge-blue">❓ Pending</span></td><td></td></tr>
+        <tr><td>Maleesha</td><td><span class="badge badge-green">✅ Distinction</span></td><td><span class="badge badge-green">✅ Distinction</span></td><td>Reported all Distinction</td></tr>
+        <tr><td>Aileen</td><td><span class="badge badge-green">✅ Done</span></td><td><span class="badge badge-green">✅ Done</span></td><td>Reported complete</td></tr>
+        <tr><td>Shaus</td><td><span class="badge badge-red">❌ Not Done</span></td><td><span class="badge badge-red">❌ Not Done</span></td><td>Zero submissions</td></tr>
+        <tr><td>Izman</td><td><span class="badge badge-yellow">🟡 In Progress</span></td><td><span class="badge badge-yellow">🟡 In Progress</span></td><td>Not received</td></tr>
+        <tr><td>Others</td><td><span class="badge badge-blue">❓ Pending</span></td><td><span class="badge badge-blue">❓ Pending</span></td><td>Update from Thulasi needed</td></tr>
+      </table>
+    </div>
+
+    <div class="tab-content" id="unit21">
+      <h3>Unit 21 — Hussain Shareef</h3>
+      <p style="color:var(--gray);">⚠️ Data pending from Hussain Shareef.</p>
+      <table>
+        <tr><th>Student</th><th>Unit 21</th><th>Notes</th></tr>
+        <tr><td>Maleesha</td><td><span class="badge badge-green">✅ Distinction</span></td><td>Reported complete</td></tr>
+        <tr><td>Aileen</td><td><span class="badge badge-green">✅ Done</span></td><td>Reported complete</td></tr>
+        <tr><td>Shaus</td><td><span class="badge badge-red">❌ Not Done</span></td><td>Zero submissions</td></tr>
+        <tr><td>Izman</td><td><span class="badge badge-yellow">🟡 In Progress</span></td><td>Not received</td></tr>
+        <tr><td>Others</td><td><span class="badge badge-blue">❓ Pending</span></td><td>Update from Hussain Shareef needed</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- STUDENT PROFILES -->
+  <div class="section" id="students">
+    <h2>👤 Student Profiles</h2>
+    <input type="text" class="search-box" id="searchInput" placeholder="🔍 Search student name..." onkeyup="filterStudents()">
+    <div class="student-grid" id="studentGrid">
+
+      <!-- SAASHIN -->
+      <div class="student-card" data-name="aasiyath saashin ali">
+        <h4>⭐ Aasiyath Saashin Ali <span class="index">(4898)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-green">96%</span></span></div>
+        <div class="detail"><span class="label">Unit 4</span><span class="badge badge-green">Done</span></div>
+        <div class="detail"><span class="label">Unit 22</span><span class="badge badge-yellow">Half Done</span></div>
+        <div class="notes">
+          <strong>Strengths:</strong> Highest attendance. Improved Pass → Merit.<br>
+          <strong>Concern:</strong> Very silent, only nods, won't speak.<br>
+          <strong>Action:</strong> Complete U22; encourage verbal participation gently.
+        </div>
+      </div>
+
+      <!-- JUMAN -->
+      <div class="student-card" data-name="hussain jumaan mohamed">
+        <h4>Hussain Jumaan Mohamed <span class="index">(4879)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-green">93%</span></span></div>
+        <div class="detail"><span class="label">Unit 4</span><span class="badge badge-yellow">Half Done</span></div>
+        <div class="detail"><span class="label">Unit 22</span><span class="badge badge-yellow">Half Done</span></div>
+        <div class="notes">
+          <strong>Strengths:</strong> Smart; now showing up in specific classes.<br>
+          <strong>Concern:</strong> Sleeps in class.<br>
+          <strong>Uniform:</strong> ✅ Hair issue resolved.<br>
+          <strong>Action:</strong> Complete U4 & U22; address sleeping.
+        </div>
+      </div>
+
+      <!-- NIMSHY -->
+      <div class="student-card" data-name="aminath nimshy abdul qadhir">
+        <h4>Aminath Nimshy Abdul Qadhir <span class="index">(4769)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-green">83%</span></span></div>
+        <div class="detail"><span class="label">Unit 4</span><span class="badge badge-yellow">Corrections Pending</span></div>
+        <div class="detail"><span class="label">Unit 22</span><span class="badge badge-yellow">Corrections Pending</span></div>
+        <div class="notes">
+          <strong>Concern:</strong> Unit 3 not submitted. Corrections pending U4 & U22.<br>
+          <strong>Uniform:</strong> 🟡 Hair tie issue — parents informed.<br>
+          <strong>Action:</strong> Follow up corrections; monitor hair tie.
+        </div>
+      </div>
+
+      <!-- MANHA -->
+      <div class="student-card" data-name="fathimath manha shiyam">
+        <h4>Fathimath Manha Shiyam <span class="index">(4794)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-green">82%</span></span></div>
+        <div class="detail"><span class="label">Unit 4</span><span class="badge badge-green">Done</span></div>
+        <div class="detail"><span class="label">Unit 22</span><span class="badge badge-green">Done</span></div>
+        <div class="notes">
+          <strong>Strengths:</strong> ⭐ Always submits assignments first.<br>
+          <strong>Action:</strong> None — on track. Keep encouraging.
+        </div>
+      </div>
+
+      <!-- DEEDATH -->
+      <div class="student-card" data-name="mohamed deedhath ahmed">
+        <h4>Mohamed Dheedhath Ahmed <span class="index">(4752)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-green">78%</span></span></div>
+        <div class="detail"><span class="label">Unit 4</span><span class="badge badge-yellow">Half (Not Received)</span></div>
+        <div class="detail"><span class="label">Unit 22</span><span class="badge badge-yellow">Half (Not Received)</span></div>
+        <div class="notes">
+          <strong>Strengths:</strong> Leadership skills.<br>
+          <strong>Concern:</strong> ADHD; needs more focus.<br>
+          <strong>Uniform:</strong> ✅ Hair issue resolved.<br>
+          <strong>Action:</strong> Structured deadlines; collect pending work.
+        </div>
+      </div>
+
+      <!-- AYAAN -->
+      <div class="student-card" data-name="mohamed ayaan aswad">
+        <h4>Mohamed Ayaan Aswad <span class="index">(4796)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-yellow">73%</span></span></div>
+        <div class="detail"><span class="label">Unit 4</span><span class="badge badge-green">All Received</span></div>
+        <div class="detail"><span class="label">Unit 22</span><span class="badge badge-green">All Received</span></div>
+        <div class="notes">
+          <strong>Concern:</strong> Just below 75%; 4 late arrivals.<br>
+          <strong>Action:</strong> Monitor attendance closely — at risk.
+        </div>
+      </div>
+
+      <!-- ZAISHA -->
+      <div class="student-card" data-name="zaisha saud">
+        <h4>Zaisha Saud <span class="index">(4841)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-yellow">72%</span></span></div>
+        <div class="detail"><span class="label">Unit 4</span><span class="badge badge-green">Done</span></div>
+        <div class="detail"><span class="label">Unit 22</span><span class="badge badge-green">Done</span></div>
+        <div class="notes">
+          <strong>Concern:</strong> Spelling difficulties; 11 late arrivals.<br>
+          <strong>Action:</strong> Spelling support; attendance warning.
+        </div>
+      </div>
+
+      <!-- IZMAN -->
+      <div class="student-card" data-name="ahmed izmaan nazeer">
+        <h4>Ahmed Izmaan Nazeer <span class="index">(4829)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-yellow">59%</span></span></div>
+        <div class="detail"><span class="label">All Units</span><span class="badge badge-yellow">In Progress</span></div>
+        <div class="notes">
+          <strong>Concern:</strong> Working but nothing received; below 75%.<br>
+          <strong>Uniform:</strong> 🔴 Hair issue ONGOING — refuses to cut.<br>
+          <strong>Action:</strong> Hard deadline; escalate grooming to section head.
+        </div>
+      </div>
+
+      <!-- AILEEN -->
+      <div class="student-card" data-name="aishath aileen ikleel">
+        <h4>Aishath Aileen Ikleel <span class="index">(4859)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-yellow">58%</span></span></div>
+        <div class="detail"><span class="label">All Units</span><span class="badge badge-green">Done</span></div>
+        <div class="notes">
+          <strong>Strengths:</strong> All units completed.<br>
+          <strong>Concern:</strong> Attendance well below 75%.<br>
+          <strong>Action:</strong> Attendance warning needed.
+        </div>
+      </div>
+
+      <!-- MALEESHA -->
+      <div class="student-card" data-name="mariyam maleesha mujahid">
+        <h4>🌟 Mariyam Maleesha Mujahid <span class="index">(4922)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-yellow">55%</span></span></div>
+        <div class="detail"><span class="label">All Units</span><span class="badge badge-green">ALL DISTINCTION</span></div>
+        <div class="notes">
+          <strong>Strengths:</strong> 🌟 All units at Distinction level!<br>
+          <strong>Concern:</strong> Attendance 55% — risk of not meeting 75%.<br>
+          <strong>Action:</strong> Attendance warning despite excellent academics.
+        </div>
+      </div>
+
+      <!-- SHAUS -->
+      <div class="student-card" data-name="hassan shaus mohamed" style="border-left:4px solid var(--accent);">
+        <h4>🔴 Hassan Shaus Mohamed <span class="index">(4843)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-red">36%</span></span></div>
+        <div class="detail"><span class="label">All Units</span><span class="badge badge-red">NOTHING SUBMITTED</span></div>
+        <div class="notes">
+          <strong>Concern:</strong> Irregular, over-smart, zero submissions, poor discipline.<br>
+          <strong>Uniform:</strong> ✅ Hair issue resolved.<br>
+          <strong>Action Taken:</strong> Reported to Neesha Miss.<br>
+          <strong>Action Needed:</strong> Urgent parent meeting; formal warning.
+        </div>
+      </div>
+
+      <!-- UMMAMA -->
+      <div class="student-card" data-name="fathimath umama binthi adam shafeeudheen" style="border-left:4px solid var(--accent);">
+        <h4>🔴 Fathimath Umama B.A. Shafeeudheen <span class="index">(4933)</span></h4>
+        <div class="detail"><span class="label">Attendance</span><span><span class="badge badge-red">16%</span></span></div>
+        <div class="detail"><span class="label">All Units</span><span class="badge badge-red">NOT RECEIVED</span></div>
+        <div class="notes">
+          <strong>Concern:</strong> Health & mental health issues. Parents want her to attend but she resists due to peer behavior.<br>
+          <strong>Action:</strong> Involve counselor & section head; investigate peer behavior; safe return plan.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- UNIFORM -->
+  <div class="section" id="uniform">
+    <h2>👔 Uniform & Grooming Log</h2>
+    <p style="color:var(--gray);margin-bottom:15px;font-size:0.9em;">All parents/guardians were informed. Add exact dates before formal submission.</p>
+    <table>
+      <tr><th>Student</th><th>Issue</th><th>Parent Informed</th><th>Status</th><th>Resolution</th></tr>
+      <tr>
+        <td>Mohamed Dheedhath Ahmed</td><td>Hair</td><td>✅ Yes</td>
+        <td><span class="badge badge-green">Resolved</span></td><td>Cut hair</td>
+      </tr>
+      <tr>
+        <td>Ahmed Izmaan Nazeer</td><td>Hair</td><td>✅ Yes</td>
+        <td><span class="badge badge-red">Ongoing</span></td><td>Refuses to cut — escalate</td>
+      </tr>
+      <tr>
+        <td>Aminath Nimshy Abdul Qadhir</td><td>Hair Tie</td><td>✅ Yes</td>
+        <td><span class="badge badge-yellow">Monitoring</span></td><td>Parents notified</td>
+      </tr>
+      <tr>
+        <td>Hassan Shaus Mohamed</td><td>Hair</td><td>✅ Yes</td>
+        <td><span class="badge badge-green">Resolved</span></td><td>Cut hair</td>
+      </tr>
+      <tr>
+        <td>Hussain Jumaan Mohamed</td><td>Hair</td><td>✅ Yes</td>
+        <td><span class="badge badge-green">Resolved</span></td><td>Cut hair</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- DROPPED -->
+  <div class="section" id="dropped">
+    <h2>🚪 Dropped Students</h2>
+
+    <h3>A. Dropped This Semester (Confirmed via Contact)</h3>
+    <table>
+      <tr><th>#</th><th>Index</th><th>Name</th><th>Last Att %</th><th>Status</th></tr>
+      <tr><td>1</td><td>4717</td><td>Ismail Aydin Aazaad</td><td>14%</td><td><span class="badge badge-red">Dropped</span></td></tr>
+      <tr><td>2</td><td>4760</td><td>Mohamed Leem Hussain</td><td>53%</td><td><span class="badge badge-red">Dropped</span></td></tr>
+      <tr><td>3</td><td>4797</td><td>Ahmed Azaan Shareef</td><td>16%</td><td><span class="badge badge-red">Dropped</span></td></tr>
+      <tr><td>4</td><td>4806</td><td>Mohamed Shizan Shinaz</td><td>16%</td><td><span class="badge badge-red">Dropped</span></td></tr>
+      <tr><td>5</td><td>4881</td><td>Ibrahim Shail Shah</td><td>12%</td><td><span class="badge badge-red">Dropped</span></td></tr>
+      <tr><td>6</td><td>4925</td><td>Mohamed Naahil Nafiz</td><td>14%</td><td><span class="badge badge-red">Dropped</span></td></tr>
+    </table>
+
+    <h3>B. Dropped Before 14 June 2026 (Previous Semester)</h3>
+    <table>
+      <tr><th>#</th><th>Name</th><th>Status</th></tr>
+      <tr><td>1</td><td>Suhail</td><td><span class="badge badge-red">Dropped</span></td></tr>
+      <tr><td>2</td><td>Aihamaa</td><td><span class="badge badge-red">Dropped</span></td></tr>
+      <tr><td>3</td><td>Safwan</td><td><span class="badge badge-red">Dropped</span></td></tr>
+      <tr><td>4</td><td>Ahnaf</td><td><span class="badge badge-red">Dropped</span></td></tr>
+      <tr><td>5</td><td>Ahil</td><td><span class="badge badge-red">Dropped</span></td></tr>
+    </table>
+  </div>
+
+  <!-- ACTION PLAN -->
+  <div class="section" id="actions">
+    <h2>✅ Priority Action Plan</h2>
+
+    <div class="action-item">
+      <span class="priority priority-high">P1 HIGH</span>
+      <div><strong>Ummama — Wellbeing & Return Plan</strong><br>Confirm enrolment status. Involve counsellor and section head. Investigate peer behaviour concerns. Create safe return-to-school plan with parents.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="priority priority-high">P1 HIGH</span>
+      <div><strong>Shaus — Academic & Behaviour Intervention</strong><br>Urgent parent meeting. Formal warning for zero submissions and 36% attendance. Follow up with Neesha Miss on discipline referral.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="priority priority-high">P1 HIGH</span>
+      <div><strong>Izman — Grooming Escalation</strong><br>Student refuses to cut hair despite parent contact. Escalate to section head in writing with dated documentation.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="priority priority-high">P1 HIGH</span>
+      <div><strong>Attendance Warnings (Below 75%)</strong><br>Send formal attendance warning letters to parents of: Zaisha (72%), Ayaan (73%), Maleesha (55%), Aileen (58%), Izman (59%).</div>
+    </div>
+
+    <div class="action-item">
+      <span class="priority priority-medium">P2 MED</span>
+      <div><strong>Collect Pending BTEC Work</strong><br>Nimshy (corrections U4/U22), Saashin (U22 half), Juman (U4/U22 half), Deedath (U4/U22 not received), Izman (all in progress).</div>
+    </div>
+
+    <div class="action-item">
+      <span class="priority priority-medium">P2 MED</span>
+      <div><strong>Obtain Unit 3, 8, 21 Data</strong><br>Follow up with Thulasi (U3, U8) and Hussain Shareef (U21) for complete student progress records.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="priority priority-medium">P2 MED</span>
+      <div><strong>Complete Unmarked Attendance</strong><br>9 unmarked days across most students need to be completed in the system for accurate final percentages.</div>
+    </div>
+
+    <div class="action-item">
+      <span class="priority priority-low">P3 LOW</span>
+      <div><strong>Recognise Top Performers</strong><br>Acknowledge Saashin (96% att, Pass→Merit), Maleesha (All Distinction), Manha (first to submit), Juman (improved engagement).</div>
+    </div>
+
+    <div class="action-item">
+      <span class="priority priority-low">P3 LOW</span>
+      <div><strong>Address Sleeping in Class</strong><br>Juman — discuss privately; consider seating change or engagement strategies.</div>
+    </div>
+  </div>
+
+  <!-- SIGNATURES -->
+  <div class="section">
+    <h2>✍️ Signatures</h2>
+    <table>
+      <tr><th>Role</th><th>Name</th><th>Signature</th><th>Date</th></tr>
+      <tr><td>Class Teacher</td><td>Nithish Sanjayan Kasaragod</td><td>________________</td><td>__________</td></tr>
+      <tr><td>Section Head</td><td></td><td>________________</td><td>__________</td></tr>
+      <tr><td>Principal</td><td></td><td>________________</td><td>__________</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="footer">
+  <button class="print-btn" onclick="window.print()">🖨️ Print Full Record</button>
+  <p style="margin-top:15px;">11L Class Teacher Record — Nithish Sanjayan Kasaragod — Batch 2025<br>
+  Period: 14 Jun 2026 – 22 Oct 2026 | Confidential Internal Document</p>
+</div>
+
+<script>
+  // Tab switching
+  function showTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Student search
+  function filterStudents() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    document.querySelectorAll('.student-card').forEach(card => {
+      const name = card.getAttribute('data-name');
+      card.style.display = name.includes(query) ? 'block' : 'none';
+    });
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('.nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
